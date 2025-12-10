@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <meta charset="UTF-8">
+    <title>AI-Driven Employee Feedback Analyzer</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #222;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 60%;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 10px 18px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #0066ff;
+            border: none;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .result-box {
+            margin-top: 30px;
+            width: 60%;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+        }
+
+        .positive {
+            background: #e7ffe9;
+            border-left: 6px solid #1faa4a;
+        }
+
+        .negative {
+            background: #ffeaea;
+            border-left: 6px solid #d9534f;
+        }
+
+        .label {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .message-box {
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .good {
+            background: #dbffdd;
+            color: #147b1c;
+            border: 1px solid #20b132;
+        }
+
+        .alert {
+            background: #ffdbdb;
+            color: #b71c1c;
+            border: 1px solid #e3342f;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>AI-Driven Employee Feedback Analyzer</h1>
+
+    <form action="/analyze" method="POST">
+        <label for="feedback"><strong>Enter feedback:</strong></label><br>
+        <textarea name="feedback" placeholder="Type employee feedback here...">{{ input_text }}</textarea>
+        <br>
+        <button type="submit">Analyze</button>
+    </form>
+
+    {% if prediction %}
+        {% set label = prediction.predicted_label %}
+        {% set descriptions = {
+            "satisfaction": "Employee feels happy and satisfied with work environment or management.",
+            "frustration": "Employee shows dissatisfaction or annoyance with work or conditions.",
+            "motivation": "Employee feels inspired and driven by growth opportunities or culture.",
+            "concern": "Feedback contains fear, stress, job insecurity, or negative emotional indicators."
+        } %}
+
+        {% set is_negative = label in ["frustration", "concern"] %}
+        {% set box_class = "negative" if is_negative else "positive" %}
+
+        <div class="result-box {{ box_class }}">
+            <div class="label">Predicted Label: {{ label | capitalize }}</div>
+            <p><em>{{ descriptions[label] }}</em></p>
+
+            {% if is_negative %}
+                <div class="message-box alert">
+                    ⚠ HR Attention Needed
+                </div>
+            {% else %}
+                <div class="message-box good">
+                    ✅ Positive Signal
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+/* ----- Global Page Layout ----- */
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #eef2f5;
+    margin: 0;
+    padding: 60px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #2b2b2b;
+    margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+
+/* ----- Main Form Card ----- */
+
+.main-card {
+    width: 60%;
+    background: #ffffff;
+    padding: 28px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ----- Form Elements ----- */
+
+textarea {
+    width: 100%;
+    min-height: 140px;
+    font-size: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1.5px solid #c8cdd2;
+    resize: vertical;
+    transition: 0.2s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0px 0px 4px rgba(0, 123, 255, 0.4);
+}
+
+button {
+    margin-top: 18px;
+    width: 180px;
+    background-color: #007bff;
+    color: white;
+    padding: 12px 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background-color: #005fcc;
+}
+
+
+/* ----- Prediction Result Box ----- */
+
+.result-box {
+    width: 60%;
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+
+/* Positive Result */
+
+.result-positive {
+    border-left: 6px solid #24a148;
+    background: #eafaf0;
+}
+
+
+/* Negative Result */
+
+.result-negative {
+    border-left: 6px solid #da1e28;
+    background: #fdeaea;
+}
+
+
+/* ----- Text and Status Badges ----- */
+
+.label {
+    font-size: 22px;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.status-box {
+    margin-top: 12px;
+    padding: 10px;
+    font-size: 17px;
+    text-align: center;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+
+/* Positive Badge */
+
+.status-positive {
+    background: #d4ffe0;
+    color: #0e7220;
+    border: 1px solid #23b146;
+}
+
+
+/* Negative Badge */
+
+.status-negative {
+    background: #ffd6d6;
+    color: #a70606;
+    border: 1px solid #c91c1c;
+}
+
+
+/* Responsive Layout */
+
+@media (max-width: 900px) {
+    .main-card,
+    .result-box {
+        width: 90%;
+    }
+    button {
+        width: 100%;
+    }
+}
